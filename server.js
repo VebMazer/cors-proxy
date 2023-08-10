@@ -23,10 +23,6 @@ app.use(requestLogger)
 
 app.all('*', (req, res) => {
 
-    // Required response headers.
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE, OPTIONS")
-
     if (req.method === 'OPTIONS') {
 
         // Preflight request handling
@@ -34,8 +30,8 @@ app.all('*', (req, res) => {
     
     } else {
         
-        // Remove the '/' character from the start of the request path.
-        // After doing that it only contains the target sites url.
+        // Remove the '/' character from the start of req.url
+        // After that it only contains the target sites url.
         const url = req.url.slice(1)
 
         // User-Agent header is required by some websites.
